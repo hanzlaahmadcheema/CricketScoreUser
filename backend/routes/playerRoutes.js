@@ -1,8 +1,8 @@
 const express = require('express');
-const { getPlayerStats } = require('../controllers/playerController');
+const { getPlayers } = require('../controllers/playerController');
 
 const router = express.Router();
 
-router.get('/api/players', getPlayerStats);
+router.get('/players', getPlayers);
 
 module.exports = router;

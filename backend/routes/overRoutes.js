@@ -1,8 +1,8 @@
 const express = require('express');
-const { getOversSummary } = require('../controllers/overController');
+const { getOverSummary } = require('../controllers/overController');
 
 const router = express.Router();
 
-router.get('/api/overs', getOversSummary);
+router.get('/api/overs', getOverSummary);
 
 module.exports = router;
