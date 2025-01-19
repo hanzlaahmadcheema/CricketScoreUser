@@ -1,0 +1,16 @@
+i'll only keep this on localhost
+now we work on backend to fetch data from database
+fetch following
+is match ongoing
+is first inning
+both teams(id=1, id=2)
+players of both teams (firstteamplayerids=1-11, secondteamplayerids=12-22)
+toss winner
+choice of toss winner team
+fetch score, overs, of match
+fetch batsman score, boundries
+fetch bowler
+over summary
+match summary
+player stats
+get top performer(batsman, bowler)

@@ -1,12 +1,13 @@
-const db = require('../services/db');
-
-const getOversSummary = async (req, res) => {
+exports.getOverSummary = async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM overs WHERE match_id = (SELECT id FROM matches WHERE status = "Ongoing" LIMIT 1)');
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to fetch over summary', error });
+      const [overs] = await db.query(`
+        SELECT over_number, runs, wickets 
+        FROM overs 
+        WHERE match_id = (SELECT id FROM matches WHERE status = 'Ongoing')
+      `);
+      res.json(overs);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch over summary', details: err.message });
     }
-};
-
-module.exports = { getOversSummary };
+  };
+  

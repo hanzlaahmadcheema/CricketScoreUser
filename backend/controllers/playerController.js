@@ -1,12 +1,13 @@
-const db = require('../services/db');
-
-const getPlayerStats = async (req, res) => {
+exports.getPlayers = async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM players');
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to fetch player statistics', error });
+      const [players] = await db.query(`
+        SELECT * 
+        FROM players 
+        WHERE team_id IN (1, 2)
+      `);
+      res.json(players);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch players', details: err.message });
     }
-};
-
-module.exports = { getPlayerStats };
+  };
+  
