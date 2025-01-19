@@ -1,20 +1,15 @@
-const db = require('../services/db'); // Database connection
+const db = require('../services/db');
 
-const getAllMatches = (req, res) => {
-    const query = 'SELECT * FROM matches';
-    db.query(query, (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(200).json(results);
-    });
+const getMatchDetails = async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM matches WHERE status = "Ongoing" LIMIT 1');
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No ongoing match found.' });
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch match details', error });
+    }
 };
 
-const getMatchById = (req, res) => {
-    const { id } = req.params;
-    const query = 'SELECT * FROM matches WHERE id = ?';
-    db.query(query, [id], (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(200).json(results[0]);
-    });
-};
-
-module.exports = { getAllMatches, getMatchById };
+module.exports = { getMatchDetails };

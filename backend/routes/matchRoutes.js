@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.Router();
-const { getAllMatches, getMatchById } = require('../controllers/matchController');
+const { getMatchDetails } = require('../controllers/matchController');
 
-router.get('/', getAllMatches);
-router.get('/:id', getMatchById);
+const router = express.Router();
+
+router.get('/api/match', getMatchDetails);
 
 module.exports = router;
